@@ -23,15 +23,18 @@ links on the left).
 **NaxToPy** is a powerful tool for FEM analysis post-processing!
 
 **CAUTION:** To use NaxToPy, [**NaxTo**](https://apps.microsoft.com/detail/XP9MMH0KDKGRJN?hl=en-US&gl=US) must be installed.
-This version is compatible with **NaxTo 2024.1**. It may be compatible with all the steps of this version (2024.1.0, 2024.1.1, 2024.1.2, etc.).
+This version is compatible with **NaxTo 2024.2**. It is compatible with all the steps of this version (2024.2.0, 2024.2.1, 2024.2.2, etc.).
 Check in _Programs and Features_ the NaxTo version that is installed. 
 
 ## Installation
 
+If python is installed and `pip` is added to the PATH:
 
-If python is callable from the command line:
+`pip install NaxToPy`
 
-`py -m pip install NaxToPy`
+An alternative, if Python is callable from the command line:
+
+`python -m pip install NaxToPy`
 
 For **Visual Studio** users:
 - Open "Python Environments" window
@@ -55,7 +58,7 @@ same directory. When ever you want to use the NaxToPy package add the following 
 
 If python is callable from the command line:
 
-`py -m pip install -U NaxToPy`
+`python -m pip install -U NaxToPy`
 
 For Visual Studio users:
 - Open "Python Environments" window
@@ -136,6 +139,18 @@ the LoadCases that are critical or the Increment that is critical instead of the
 2. New internal methods to look for the compatibility with low-level dependencies.
 3. The name of the .log is now NaxToPy_Year-Month-Day.log.
 
+### v.2.0.1
+1. The compatibility is extended to all NaxTo steps of the same version.
+2. The property N2PLoadCase.ActiveIncrement is subtitued by N2PLoadCase.ActiveN2PIncrement.
+It uses an object instaed of an int.
+3. Update of the examples of some docstrings.
+
+### v.2.1.0
+1. Reading a Natran Input File: SPC and SCP1 are now supported.
+2. Bug fix. The order in the components in new_report() does not affect now.
+3. Formula check in new_derived_loadcase(), new_enevelope_loadcase() and new_derived_component().
+4. New optional arguments if n2ptoexe() to add extra libaries, packages or files.
+
 # Documentation
 
 **NaxToPy** is a package developed by Idaero Solutions© as a part of the **NaxTo** software.
@@ -215,7 +230,7 @@ loadcaseslist = model.LoadCases
 pressure_lc = model.get_load_case("pressure")
 
 # Change the active increment (by default is the last one):
-pressure_lc.ActiveIncrement = 10
+pressure_lc.ActiveN2PIncrement = pressure_lc.get_increment(10)
 
 # Look for all results
 all_results = pressure_lc.Results
