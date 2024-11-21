@@ -1,0 +1,88 @@
+$  ___________________________________________________________________
+$ |                                                                   |
+$ | Executive control section                                         |H
+$ |___________________________________________________________________|H
+$   HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+
+ID SOL101,STATIC
+SOL 101
+$GEOMCHECK MSGLIMIT=1000000
+
+CEND
+
+
+
+$  ___________________________________________________________________
+$ |                                                                   |
+$ | Case control section                                              |H
+$ |___________________________________________________________________|H
+$   HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+
+K2GG=KAAX
+ECHO=NONE
+$SPC=1000
+
+$$ REFERENCE TEMPERATURE
+TEMP(INIT) = 555
+
+$ Full output for all entities
+STRESS(PLOT)=ALL
+STRAIN(PLOT)=ALL
+FORCES(PLOT)=ALL
+DISPLACEMENTS(PLOT)=ALL
+GPFORCES(PLOT)=ALL
+SPCFORCES(PLOT)=ALL
+
+$$
+$$ SUBCASES
+$$
+$INCLUDE 'subcases/SUBCASE_17500'
+INCLUDE 'subcases/SUBCASE_17501'
+$INCLUDE 'subcases/SUBCASE_17502'
+$INCLUDE 'subcases/SUBCASE_17503'
+$INCLUDE 'subcases/SUBCASE_17504'
+$INCLUDE 'subcases/SUBCASE_17505'
+$INCLUDE 'subcases/SUBCASE_17506'
+$INCLUDE 'subcases/SUBCASE_17507'
+$INCLUDE 'subcases/SUBCASE_17508'
+$INCLUDE 'subcases/SUBCASE_17509'
+$INCLUDE 'subcases/SUBCASE_17510'
+
+$  ___________________________________________________________________
+$ |                                                                   |
+$ | Bulk data section                                                 |H
+$ |___________________________________________________________________|H
+$   HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+
+BEGIN BULK
+
+PARAM    POST    -1
+PARAM    AUTOSPC NO
+PARAM    K6ROT  1.
+PARAM    WTMASS .001
+PARAM    GRDPNT  0
+PARAM    SNORM  20.
+PARAM   PRTMAXIM YES
+
+
+$$$    LOAD CARDS  $$$$
+
+INCLUDE 'loads'
+
+$$$$$$$$$  FE   BULK DATA   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  
+
+INCLUDE 'mesh'
+
+$$$$      TEMPERATURES       $$$$$
+
+INCLUDE 'temperatures'
+
+$ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+$ _/                                                                  _/
+$ _/ Condensation                                                     _/
+$ _/                                                                  _/
+$ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/  
+
+INCLUDE 'condensation'
+
+ENDDATA
